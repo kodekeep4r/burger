@@ -2,7 +2,7 @@
   "name": "crpt-burger-mkt",
   "version": "0.1.0",
   "description": "Crypto Burger Food Truck",
-  "author": "codekeep4r",
+  "author": "kodekeep4r",
   "dependencies": {
     "@openzeppelin/contracts": "^2.3.0",
     "babel-polyfill": "6.26.0",
