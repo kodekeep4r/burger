@@ -239,17 +239,17 @@ async  mint  (quant)  {
   render() {
  
     return (
-      <main role="main">
-      <div className="container" >   
-         <img src={siteo}/>  
+      <main role="main" >
+      <div className="box" >   
+         <img src={siteo}   />  
           <div className="allstuff" >
               <div id="welcome">
                   <div id="spacerWelcomeTop">  </div>
                       <div id="containsLinksandSpace">
                             <div id= "containsLinks">                         
-                                  <div className="linko ">TWITTER </div>
-                                  <div className="linko">TELEGRAM </div>
-                                  <div className="linko">DISCORD </div>
+                                  <div className="linko "> <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">TWITTER </a> </div>
+                                  <div className="linko"><a href="https://www.telegram.com" target="_blank" rel="noopener noreferrer">TELEGRAM </a></div>
+                                  <div className="linko"><a href="https://www.discord.com" target="_blank" rel="noopener noreferrer">DISCORD </a></div>
                             </div>
                       </div >
                 </div >
@@ -262,9 +262,9 @@ async  mint  (quant)  {
                   <div id="spacerInfoTop">  </div>
                       <div id="containsLinksandSpace">
                             <div id= "containsInfo">                         
-                                  <div> 20 020 </div>
-                                  <div> 19 323 </div>
-                                  <div> 14.70 MATIC </div>
+                                  <div className="info"> . . . . . . ........ 20,020 <br></br></div>
+                                  <div className="info"> . . . . . . ......... 19,323 <br></br></div>
+                                  <div className="info"> . . . . . . ........M$ 14.70 <br></br></div>
                             </div>
                       </div >
                 </div >
@@ -288,9 +288,9 @@ async  mint  (quant)  {
                                 <input
                                     className="qtt "
                                     type="text"
-                                    min="1" maxlenght="2" 
+                                    maxlenght="2" 
                                     size= "2" 
-                                    value="1"
+                                    defaultValue="1"
                                     ref={(input) => { this.burger = input }}
                                   />                            
                           </form> 
