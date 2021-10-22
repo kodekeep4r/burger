@@ -7,10 +7,11 @@ import '../font.ttf';
 
 
 
-import './App.css';
+import styles from './Variables.module.css';
+/*import './App.module.css';*/
 import ContractNFT from '../abis/ContractNFT.json'
-import siteo from '../site.png';
-import order from '../site.png';
+import Siteo from '../site.png';
+import Order from '../site.png';
 
 
 /**
@@ -239,77 +240,53 @@ async  mint  (quant)  {
   render() {
  
     return (
-      <main role="main" >
-      <div className="box" >   
-         <img src={siteo}   />  
-          <div className="allstuff" >
-              <div id="welcome">
-                  <div id="spacerWelcomeTop">  </div>
-                      <div id="containsLinksandSpace">
-                            <div id= "containsLinks">                         
-                                  <div className="linko "> <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">TWITTER </a> </div>
-                                  <div className="linko"><a href="https://www.telegram.com" target="_blank" rel="noopener noreferrer">TELEGRAM </a></div>
-                                  <div className="linko"><a href="https://www.discord.com" target="_blank" rel="noopener noreferrer">DISCORD </a></div>
-                            </div>
-                      </div >
-                </div >
+      
+      <div>
+       
+          <div id={styles.Allstuff}>
+          <div id={styles.Menu}>
+            <div id={styles.ContainsLinks}>
+              <div id={styles.LinkoTw}> <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">TWITTER </a> </div>
+              <div id={styles.LinkoTe}> <a href="https://www.telegram.com" target="_blank" rel="noopener noreferrer">TELEGRAM </a></div>
+              <div id={styles.LinkoDi}> <a href="https://www.discord.com" target="_blank" rel="noopener noreferrer">DISCORD </a></div>
+            </div>
 
+            <div id={styles.ContainsInfo}>
+              <div id={styles.InfoTotalSupply}>............20,020 </div>
+              <div id={styles.InfoCurrentSupply}>............. 19,323 </div>
+              <div id={styles.InfoUnitPrice}>............M$ 14.70 </div>
+            </div>
 
+            <div id={styles.ContainsBuy}>
+              <form onSubmit={(event) => {
+                event.preventDefault();
+                const quant = this.burger.value;
+                this.mint(quant);
+              } }>
+                <input
+                  className={styles.Button}
+                  type='submit'
+                  value='ORDER NOW'
+                  img={Order} />
+                <input
+                  className={styles.Qtt}
+                  type="text"
+                  maxlenght="2"
+                  size="2"
+                  defaultValue="1"
+                  ref={(input) => { this.burger = input; } } />
+              </form>
 
-              
-
-                <div id="info">
-                  <div id="spacerInfoTop">  </div>
-                      <div id="containsLinksandSpace">
-                            <div id= "containsInfo">                         
-                                  <div className="info"> . . . . . . ........ 20,020 <br></br></div>
-                                  <div className="info"> . . . . . . ......... 19,323 <br></br></div>
-                                  <div className="info"> . . . . . . ........M$ 14.70 <br></br></div>
-                            </div>
-                      </div >
-                </div >
-
-                <div id="buy">
-                <div id="spacerBuyTop">  </div>
-                <div id="containsBuysandSpace">
-
-                    <div id= "containsBuy" >                          
-                            <form onSubmit={(event) => {
-                                  event.preventDefault()
-                                  const quant = this.burger.value
-                                  this.mint(quant)
-                                }}> 
-                                <input
-                                    className="button "
-                                    type='submit'
-                                    value='ORDER NOW'
-                                    img= {order}
-                                  />                 
-                                <input
-                                    className="qtt "
-                                    type="text"
-                                    maxlenght="2" 
-                                    size= "2" 
-                                    defaultValue="1"
-                                    ref={(input) => { this.burger = input }}
-                                  />                            
-                          </form> 
-                    
-                    </div>    
-
-</div>
-                 </div >
 
             </div>
+            </div>
+          
         </div>
-            
-        
-          
-          
-         
-        
-      
-      </main>
+                 
+        </div>
+
+       
+    
     );
   }
 }
