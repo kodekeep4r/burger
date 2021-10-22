@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import Web3 from 'web3';
 import { ethers } from "ethers";
 import Contract  from 'web3-eth-contract';
-
+import '../font.ttf';
 
 
 
 
 import './App.css';
 import ContractNFT from '../abis/ContractNFT.json'
+import siteo from '../site.png';
+import order from '../site.png';
+
 
 /**
 
@@ -236,65 +239,77 @@ async  mint  (quant)  {
   render() {
  
     return (
-      <div>
-        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-          <a
-            className="navbar-brand col-sm-3 col-md-2 mr-0"
-            href="http://www.cryptoburger.io"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            CryptoBurgers
-          </a>
-          <ul className="navbar-nav px-3">
-          <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
-              <small className="text-white"><span id="account">{this.state.account.substring(0,6)+'...'+this.state.account.substring(this.state.account.length -4)}</span></small>
-            </li>
-          </ul>
-        </nav>
-        <div className="container-fluid mt-5">
-          <div className="row">
-            <main role="main" className="col-lg-12 d-flex text-center">
-              <div className="content mr-auto ml-auto">
-                <h1>Issue Token</h1>
-                <form onSubmit={(event) => {
-                  event.preventDefault()
-                  const quant = this.color.value
-                  this.mint(quant)
-                }}>
-                  <input
-                    type='text'
-                    className='form-control mb-1'
-                    placeholder='Mint how many Burgers?'
-                    ref={(input) => { this.color = input }}
-                  />
-                  <input
-                    type='submit'
-                    className='btn btn-block btn-primary'
-                    value='MINT'
-                  />
-                </form>
-              </div>
-            </main>
-          </div>
-          <hr/>
-                    <div className="row text-center">
-            { this.state.myBurgers.map((burger, key) => {
-              return(
-                <div key={key} className="col-md-3 mb-3">
-		<div> <img     
-		         style={{ width: "100%", margin: "10px 0" }}     
-		         alt={burger.toString()}    
-		         src={this.state.gateway + burger.toString() +'.png'}      
-		       />
-		</div>
-                  <div>{burger.toString()}</div>
-                </div>
-              )
-            })}
-          </div>
+      <main role="main">
+      <div className="container" >   
+         <img src={siteo}/>  
+          <div className="allstuff" >
+              <div id="welcome">
+                  <div id="spacerWelcomeTop">  </div>
+                      <div id="containsLinksandSpace">
+                            <div id= "containsLinks">                         
+                                  <div className="linko ">TWITTER </div>
+                                  <div className="linko">TELEGRAM </div>
+                                  <div className="linko">DISCORD </div>
+                            </div>
+                      </div >
+                </div >
+
+
+
+              
+
+                <div id="info">
+                  <div id="spacerInfoTop">  </div>
+                      <div id="containsLinksandSpace">
+                            <div id= "containsInfo">                         
+                                  <div> 20 020 </div>
+                                  <div> 19 323 </div>
+                                  <div> 14.70 MATIC </div>
+                            </div>
+                      </div >
+                </div >
+
+                <div id="buy">
+                <div id="spacerBuyTop">  </div>
+                <div id="containsBuysandSpace">
+
+                    <div id= "containsBuy" >                          
+                            <form onSubmit={(event) => {
+                                  event.preventDefault()
+                                  const quant = this.burger.value
+                                  this.mint(quant)
+                                }}> 
+                                <input
+                                    className="button "
+                                    type='submit'
+                                    value='ORDER NOW'
+                                    img= {order}
+                                  />                 
+                                <input
+                                    className="qtt "
+                                    type="text"
+                                    min="1" maxlenght="2" 
+                                    size= "2" 
+                                    value="1"
+                                    ref={(input) => { this.burger = input }}
+                                  />                            
+                          </form> 
+                    
+                    </div>    
+
+</div>
+                 </div >
+
+            </div>
         </div>
-      </div>
+            
+        
+          
+          
+         
+        
+      
+      </main>
     );
   }
 }
