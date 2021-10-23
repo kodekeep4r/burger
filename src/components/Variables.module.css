@@ -11,31 +11,32 @@
   float: left;
   font-family: "I-pixel-u";  
   width: 36%;
-  max-height: 100%;
-  padding-top: 5%;
-  padding-left: 5%;
+  height: 100%;
+  padding-top: 2%;
+  padding-left: 2%;
   margin: 2%;
   
  }
 
  #Menu{
   background: url("../assets/1x/menu.png") no-repeat center center ;
-  background-size: cover;
+  background-size: contain;
   max-height:100%;
   top:0px;
+  padding-bottom: 100%;
+  float: none;
+
  }
 
 #ContainsLinks{
   float: left;
-  clear: left;
-
+    clear: left;
   text-align: left;
   padding-left: 84%; 
   font-family: "I-pixel-u";   
   width: 100%;
   height: 100%;
   padding-top: 16%;    
-  height: 100%;
   font-size: 130%;
   font-weight: bold;
   background-size: contain;
@@ -117,84 +118,114 @@ a:active {
 
 
 
-
 #ContainsInfo{
-  float: right;
-  text-align: right;
-  padding-right: 23%;
-  padding-top: 36%;  
-  width: 100%;
-  display: inline;
+  float: left;
+  clear: left;
+  text-align: left;
+  padding-left: 54%; 
   font-family: "I-pixel-u";   
-  
-  font-size: 100%;
+  width: 100%;
+  height: 100%;
+  padding-top: 41%;    
+  height: 100%;
+  font-size: 130%;
   font-weight: bold;
   background-size: contain;
   background-repeat: no-repeat;
   
+  height: min-content;
+  width: min-content;
+  display: inline;
+
+}
+
+#Spacer{
+  padding-top: 50%;  
+  max-height: 100%;
 }
 
 
 
 #InfoTotalSupply{
-  float: right;
+  float: left;
+  clear:left;
+
   background-color: rgba(0, 0, 0, 0)  ;
   height: 33%;
-  font-size: 21px;
   font-weight: bold;
   background-size: cover;
+  font-size: large;
+
   margin: 0;
-  display:  block;
-  place-content: center;
-  align-items: center;
+  display: inline;
+  
 }
 
 
 #InfoCurrentSupply{
-  float: right;
-  clear:right;
+  float: left;
+  clear:left;
   background-color: rgba(0, 0, 0, 0)  ;
   height: 33%;
-  font-size: 21px;
   font-weight: bold;
   background-size: cover;
+  font-size: large;
+  display: inline;
+
+
   margin: 0;
-  display:  block;
+  display:  inline;
   place-content: center;
 }
 
 
 #InfoUnitPrice{
-  float: right;
-  clear: right;
+  float: left;
+  clear: left;
   background-color: rgba(0, 0, 0, 0)  ;
   height: 33%;
-
-  font-size: 21px;
+  display: inline;
+  font-size: large;
   font-weight: bold;
   background-size: cover;
   margin: 0;
-  display:  block;
 }
 
 
+
 #ContainsBuy{
+  float: left;
+  clear: left;
   text-align: left;
+  padding-left: 46%; 
+  font-family: "I-pixel-u";   
   width: 100%;
   height: 100%;
-  padding-bottom: 0%;  
+  padding-top: 5%;    
+  height: 100%;
+  font-size: 130%;
+  font-weight: bold;
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+  height: min-content;
+  width: min-content;
+  display: inline;
+
+}
+
+#ContainsBuy_old{
+  text-align: right;
+  float: none;
+  width: 100%;
+  height: 100%;
+  padding-top: 10%;  
   align-items: bottom;
-  padding-right: 14%;
   border-width: 10px;
   border-left: yellow;
-  padding-left: 23%;
+  padding-right: 3%;
   background-size: contain;
   margin-left: 0;
-
-
-
-  
-
 }
 
  .Button{
@@ -205,6 +236,9 @@ a:active {
   text-align: center;
   place-items: center;
   height: 100%;
+  max-width:100%;
+  display: inline;
+  float: none;
 
   
  }
@@ -218,6 +252,10 @@ a:active {
  text-align: center;
  place-items: center;
  height: 100%;
+ display: inline;
+ float: none;
+
+
 
  
 }
@@ -230,6 +268,26 @@ input[type="text"], textarea {
 
 }
 
+form {
+  display: flex;
+  align-items: center; /* Vertical alignment */
+}
+
+.tnp-subscription {
+  font-size: 13px;
+  display: block;
+  margin: 15px auto;
+  max-width: 500px;
+  width: 100%;
+}
+
+.tnp-subscription input.tnp-submit {
+  background-color: #6acbdc;
+  ;
+  color: #fff;
+  width: auto;
+  height: auto;
+}
 
 
 img.bg {
@@ -250,13 +308,15 @@ img.bg {
 body {
   position: relative;
   background: url("../assets/1x/background.png") no-repeat center center fixed;
-  background-size: cover;
+  background-size: contain;
   height: 100%;
 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+}
+
+html {
+ 
+  height: 100%;
+
 }
 
 

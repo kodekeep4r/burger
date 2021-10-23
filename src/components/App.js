@@ -250,12 +250,11 @@ async  mint  (quant)  {
               <div id={styles.LinkoTe}> <a href="https://www.telegram.com" target="_blank" rel="noopener noreferrer">TELEGRAM </a></div>
               <div id={styles.LinkoDi}> <a href="https://www.discord.com" target="_blank" rel="noopener noreferrer">DISCORD </a></div>
             </div>
-
-            <div id={styles.ContainsInfo}>
-              <div id={styles.InfoTotalSupply}>............20,020 </div>
-              <div id={styles.InfoCurrentSupply}>............. 19,323 </div>
-              <div id={styles.InfoUnitPrice}>............M$ 14.70 </div>
-            </div>
+            <span id={styles.ContainsInfo}>
+              <span id={styles.InfoTotalSupply}>............20,020</span>
+              <span id={styles.InfoCurrentSupply}>.............19,323</span>
+              <span id={styles.InfoUnitPrice}>............M$14.70</span>
+            </span>
 
             <div id={styles.ContainsBuy}>
               <form onSubmit={(event) => {
@@ -263,11 +262,16 @@ async  mint  (quant)  {
                 const quant = this.burger.value;
                 this.mint(quant);
               } }>
+                <span>
+
                 <input
                   className={styles.Button}
                   type='submit'
                   value='ORDER NOW'
                   img={Order} />
+                  </span>
+                  <span>
+
                 <input
                   className={styles.Qtt}
                   type="text"
@@ -275,7 +279,8 @@ async  mint  (quant)  {
                   size="2"
                   defaultValue="1"
                   ref={(input) => { this.burger = input; } } />
-              </form>
+         </span>
+  </form>
 
 
             </div>
