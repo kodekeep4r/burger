@@ -1,50 +1,105 @@
 /* Styles go here */
 
-.token {
-  height: 0px;
-  width: 15px;
-  border-radius: 50%;
-  display: inline-block;
+
+html { 
+   /* height: 100%; */
+   background-color: #ecd5ab;
+   /* align-self: center; */
+   /* align-self: center; */
+   /* align-items: center; */
+   /* align-content: end; */
+   vertical-align: middle;
+   
 }
 
-#Allstuff{
-  float: left;
-  font-family: "I-pixel-u";  
-  width: 36%;
+body {
   height: 100%;
-  padding-top: 2%;
-  padding-left: 2%;
-  margin: 2%;
-  
+  font-family: "I-pixel-u";  
+  text-size-adjust: auto; 
+  align-self: center;
+
+
+}
+
+#CryptoBurger{
+  background: url(../assets/1x/background.png) no-repeat center center;
+  background-size: contain;
+  background-color: #ecd5ab;
+  position: relative;
+  width: 100%;
+  padding-top: 57.6%;
+  height: 0;
+  align-self: center;
+  align-content: center;
+
+
+}
+
+
+#MintingPage{
+ 
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 9%;
+  color: black;
+  text-align: center;
+  top: 4%;
+  /* padding-left: 9%; */
+  align-content: center;
+
  }
 
- #Menu{
-  background: url("../assets/1x/menu.png") no-repeat center center ;
+#MenuBg{
+  /* max-width: 40%; */
+  background: url(../assets/1x/menu.png) no-repeat;
   background-size: contain;
-  max-height:100%;
-  top:0px;
-  padding-bottom: 100%;
-  float: none;
+  position: relative;
+  width: 30%;
+  padding-top: 37.6%;
 
+}
+
+ #Menu{ 
+    /* float: left; */
+    position: absolute;
+    top: 13%;
+    /* padding-left: 0%; */
+    /* top: 0; */
+    /* bottom: 0; */
+    /* right: 0; */
+    /* left: 0; */
+    width: 100%;
+
+ }
+
+ #MenuContent{
+   position: relative;
+   padding-top: 8%;
+   padding-left:  0%;
+   top: 0;
+   bottom: 0;
+   right: 0;
+   left: 0;
  }
 
 #ContainsLinks{
-  float: left;
-    clear: left;
-  text-align: left;
-  padding-left: 84%; 
-  font-family: "I-pixel-u";   
-  width: 100%;
-  height: 100%;
-  padding-top: 16%;    
-  font-size: 130%;
-  font-weight: bold;
-  background-size: contain;
-  background-repeat: no-repeat;
   
-  height: min-content;
-  width: min-content;
-  display: inline;
+        /* position: relative; */
+        float: left;
+        /* text-align: left; */
+        padding-left: 87%;
+        /* width: 50%; */
+        /* top: 1000%; */
+        font-size: larger;
+        /* font-weight: bold; */
+        /* background-size: contain; */
+        /* background-repeat: no-repeat; */
+        height: -webkit-min-content;
+        width: min-content;
+        display: inline;
+        /* overflow: visible; */
 
   
 
@@ -53,16 +108,22 @@
 
 #LinkoTw{
   float: left;
-  overflow: hidden;
-  background-color: #4a9db9;
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: min-content;
-  width: min-content;
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: inline;
-  padding-left: 4px;
+    /* overflow: hidden; */
+    background-color: #4a9db9;
+    /* background-size: contain; */
+    /* background-repeat: no-repeat; */
+    /* height: -webkit-min-content; */
+    /* height: min-content; */
+    width: -webkit-min-content;
+    width: min-content;
+    /* background-size: contain; */
+    /* background-repeat: no-repeat; */
+    /* display: inline; */
+    margin-bottom: 4%;
+    text-align: left;
+    margin-left: 4%;
+    
+    
 
 
 }
@@ -70,26 +131,42 @@
 #LinkoTe{
   float: left;
   clear: left;
-  margin: 4%;
-  overflow: hidden;
-  background-color: #4A9DB9;
-  padding-left: 4px;
-
+  /* overflow: hidden; */
+  background-color: #4a9db9;
+  /* background-size: contain; */
+  /* background-repeat: no-repeat; */
+  /* height: -webkit-min-content; */
+  /* height: min-content; */
+  width: -webkit-min-content;
+  width: min-content;
+  /* background-size: contain; */
+  /* background-repeat: no-repeat; */
+  /* display: inline; */
+  margin-bottom: 4%;
+  text-align: left;
+  margin-left: 4%;
+  
+  
 
 }
 
 #LinkoDi{
   float: left;
   clear: left;
-  background-color: #4A9DB9;
-  border: 0;
-  height: min-content;
+  /* overflow: hidden; */
+  background-color: #4a9db9;
+  /* background-size: contain; */
+  /* background-repeat: no-repeat; */
+  /* height: -webkit-min-content; */
+  /* height: min-content; */
+  width: -webkit-min-content;
   width: min-content;
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: inline;
-  padding-left: 4px;
-
+  /* background-size: contain; */
+  /* background-repeat: no-repeat; */
+  /* display: inline; */
+  margin-bottom: 4%;
+  text-align: left;
+  margin-left: 4%;
 
 }
 
@@ -121,21 +198,22 @@ a:active {
 #ContainsInfo{
   float: left;
   clear: left;
-  text-align: left;
-  padding-left: 54%; 
-  font-family: "I-pixel-u";   
-  width: 100%;
-  height: 100%;
-  padding-top: 41%;    
-  height: 100%;
-  font-size: 130%;
-  font-weight: bold;
-  background-size: contain;
-  background-repeat: no-repeat;
-  
-  height: min-content;
-  width: min-content;
-  display: inline;
+  /* text-align: right; */
+  width: 88%;
+  /* height: 100%; */
+  padding-top: 59%;
+  /* padding-left: 1%; */
+  /* height: -webkit-min-content; */
+  /* height: min-content; */
+  display: grid;
+  /* white-space: nowrap; */
+  /* padding-right: 10%; */
+  /* padding-left: 4%; */
+  margin-left: 4%;
+  /* margin-right: 5%; */
+      font-size: larger;
+      
+
 
 }
 
@@ -148,69 +226,90 @@ a:active {
 
 #InfoTotalSupply{
   float: left;
-  clear:left;
-
-  background-color: rgba(0, 0, 0, 0)  ;
-  height: 33%;
-  font-weight: bold;
-  background-size: cover;
-  font-size: large;
-
-  margin: 0;
-  display: inline;
+  /* clear: left; */
+  background-color: rgba(0, 0, 0, 0);
+  /* height: 32%; */
+  /* font-weight: bold; */
+  /* background-size: cover; */
+  font-size: larger;
+  /* margin: 0; */
+  /* display: inline; */
+  /* max-width: 80%; */
   
+
 }
 
 
 #InfoCurrentSupply{
   float: left;
   clear:left;
-  background-color: rgba(0, 0, 0, 0)  ;
-  height: 33%;
-  font-weight: bold;
-  background-size: cover;
-  font-size: large;
-  display: inline;
-
-
-  margin: 0;
-  display:  inline;
-  place-content: center;
+    /* position: relative; */
+    /* background-color: rgba(0, 0, 0, 0); */
+    /* height: 32%; */
+    /* padding-top: 1%; */
+    /* font-weight: bold; */
+    font-size: larger;
+    /* display: inline; */
+    /* margin-right: 10%; */
+    /* display: inline; */
+    /* place-content: center; */
+    padding-right: 20;
+    
 }
 
 
 #InfoUnitPrice{
   float: left;
-  clear: left;
-  background-color: rgba(0, 0, 0, 0)  ;
-  height: 33%;
-  display: inline;
-  font-size: large;
-  font-weight: bold;
-  background-size: cover;
-  margin: 0;
+  clear:left;
+    /* position: relative; */
+    /* background-color: rgba(0, 0, 0, 0); */
+    /* height: 32%; */
+    /* padding-top: 1%; */
+    /* font-weight: bold; */
+    font-size: larger;
+    /* display: inline; */
+    /* margin-right: 10%; */
+    /* display: inline; */
+    /* place-content: center; */
+    padding-right: 20;
+}
+#Pinpin {
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='1px' width='1px'><text x='0' y='15' fill='black' font-size='20'>&nbsp.&nbsp</text></svg>");
+  background-position: bottom;
+  float: left;
+}
+
+#TSL{
+  float: left;
+
+}
+
+#TSR{
+  float: right;
+
 }
 
 
-
 #ContainsBuy{
+  
   float: left;
   clear: left;
-  text-align: left;
-  padding-left: 46%; 
-  font-family: "I-pixel-u";   
-  width: 100%;
-  height: 100%;
-  padding-top: 5%;    
-  height: 100%;
-  font-size: 130%;
+  /* text-align: left; */
+  padding-left: 27%;
+  padding-top: 13%;
+  /* width: 100%; */
+  /* height: 100%; */
+  /* height: 100%; */
+  font-size: 120%;
   font-weight: bold;
-  background-size: contain;
-  background-repeat: no-repeat;
-  
-  height: min-content;
-  width: min-content;
+  /* background-size: contain; */
+  /* background-repeat: no-repeat; */
+  /* height: -webkit-min-content; */
+  /* height: min-content; */
+  /* width: -webkit-min-content; */
+  /* width: min-content; */
   display: inline;
+  
 
 }
 
@@ -238,9 +337,7 @@ a:active {
   height: 100%;
   max-width:100%;
   display: inline;
-  float: none;
-
-  
+  float: none;  
  }
 
 
@@ -254,17 +351,16 @@ a:active {
  height: 100%;
  display: inline;
  float: none;
-
-
-
  
 }
 
-input[type="text"], textarea {
+input[type="number"], textarea {
 
   background-color : #e1f7c4; 
   border : solid;
   border-color:   #e1f7c4;
+  align-content: right;
+  text-align: center;
 
 }
 
@@ -305,19 +401,6 @@ img.bg {
   left: 0;
 }
 
-body {
-  position: relative;
-  background: url("../assets/1x/background.png") no-repeat center center fixed;
-  background-size: contain;
-  height: 100%;
-
-}
-
-html {
- 
-  height: 100%;
-
-}
 
 
 @font-face {
@@ -330,3 +413,39 @@ html {
   *, *::before, *::after {
     box-sizing: initial;
 }
+
+#MyBurgersPage{
+  float: left;
+    clear: left;
+    /* width: 100%; */
+    /* height: 100%; */
+    /* z-index: 1; */
+    padding-left: 4%;
+  
+ }
+
+
+#MyBurgersBg{
+  background-size: contain;
+  position: relative ;
+  width: 100%;  
+  height:0;
+}
+
+#MyBurguerHeader{
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+ }
+ #BurgerContent{ 
+  float: left;
+  /* position: absolute; */
+  /* padding-top: 3%; */
+  /* top: 0; */
+  /* bottom: 0; */
+  /* right: 0; */
+  /* left: 0; */
+  /* width: 100%; */
+
+ }
+

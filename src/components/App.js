@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import Web3 from 'web3';
+//import Web3 from 'web3';
 import { ethers } from "ethers";
-import Contract  from 'web3-eth-contract';
+//import Contract  from 'web3-eth-contract';
 import '../font.ttf';
 
 
 
 
+
+
 import styles from './Variables.module.css';
-/*import './App.module.css';*/
 import ContractNFT from '../abis/ContractNFT.json'
-import Siteo from '../site.png';
+//import Siteo from '../site.png';
 import Order from '../site.png';
 
 
@@ -91,33 +92,40 @@ async addNetwork(id) {
 
 
   async componentWillMount() {
-    await this.loadWeb3()
+    //await this.loadWeb3()
     await this.loadBlockchainData()
 
   }
 
- 
+  /*
+async LoadEthers(){
+  if (window.ethereum) {
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+
+    // Prompt user for account connections
+    
+  }    
+    else {
+      window.alert('Please install a wallet on your browser to get burgers. You should consider trying MetaMask!')
+    }
+}
  
 async loadWeb3() {
     if (window.ethereum) {
     window.web3 = new Web3(window.ethereum)
-      //const provider = new ethers.providers.Web3Provider(window.ethereum)
-      //const signer = provider.getSigner()
-
-
-
+    
     }    
     else {
       window.alert('Please install a wallet on your browser to get burgers. You should consider trying MetaMask!')
     }
   }
   
+*/
 
 
 
-
-  async loadBlockchainData() {
-  
+  async loadBlockchainData() {  
  
     try {
   await window.ethereum.request({
@@ -148,36 +156,121 @@ async loadWeb3() {
   // handle other "switch" errors
 }
     
-    const etaeta = window.ethereum
-    //const web3 = await window.ethereum.request({ method: 'eth_requestAccounts' })
-    // Load account
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-    this.setState({ account: accounts[0] })
 
-    const networkId = await window.ethereum.request({ method: 'net_version' })
-    const networkData = ContractNFT.networks[networkId]
+
+/*
+   //Keeping web3 until Ethers is usable
+    //const web3 = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    const accountsWeb3 = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    console.log("Account web3", accountsWeb3[0])
+    //this.setState({ accweb3: accountsWeb3[0]})
+
+*/
+
+    // Load account
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    
+    //Retrieving Accounts
+    await provider.send("eth_requestAccounts");
+    const signer =  provider.getSigner();
+    const accountEthers = await signer.getAddress();
+    console.log("Account Ethers:", accountEthers);
+    this.setState({ account: accountEthers})
+
+
+//Retrieving NetworkId
+await provider.send("net_version", []);
+const networkId = await provider.getNetwork();
+console.log("Network: ", (networkId.chainId));
+//this.setState({ account: accounts[0] })
+
+
+   const networkData = ContractNFT.networks[networkId.chainId]
+    /*
+   const abiT = ContractNFT.abi
+   const addressBeforeCheckSum= networkData.address
+
+   console.log("Contract Address: ",addressBeforeCheckSum, ethers.utils.getAddress(addressBeforeCheckSum))
+   console.log("Wallet web3: ",accountsWeb3[0], ethers.utils.getAddress(accountsWeb3[0]))
+   console.log("Wallet Ethers: ",accountEthers, ethers.utils.getAddress(accountEthers))
+
+
+
+   const nftContract = new ethers.Contract(addressBeforeCheckSum, abiT, provider);
+
+   const balanceWeb3   = await nftContract.balanceOf(accountsWeb3[0]);
+   const balanceEthers = await nftContract.balanceOf(accountEthers);
+
+
+   console.log("balanceWeb3",balanceWeb3 )
+
+   console.log("balanceEthers" , balanceEthers)
+
+*/
+    
+
+    
+    //const networkId = await window.ethereum.request({ method: 'net_version' })
+   
+    console.log("networkData: ",networkData);
+
+    //const network = provider.getNetwork();
+
+
+    
+
     if(networkData) {
+      try{
       const abi = ContractNFT.abi
-      const address = networkData.address
-      const contract = new window.web3.eth.Contract(abi, address)
+      const contractAddress = networkData.address
+      const contract = new  ethers.Contract(contractAddress, abi, signer)
       //Contract.setProvider(this.provider);
       //const contract = new this.web3.eth.Contract(abi, address)
       //const contract = new ethers.Contract(address, abi, this.provider);
-
+      this.setState({contractAddress})
       //const contract = await  window.ethereum.request({method:'eth_getCode', params: [{address:'0xf6781DcA86041cE7236341Dea1149D656A60BC2C'}]})
       //console.log(contract.toString())
       this.setState({ contract })
-      const totalSupply = await contract.methods.totalSupply().call()
+      const totalSupply = await contract.totalSupply()
+      const intTotalSupply = parseInt(totalSupply, 16);
+      this.setState({ intTotalSupply });
 
-      this.setState({ totalSupply })
+      console.log(this.state.intTotalSupply);
+
+      //ethers.utils.
+      //console.log("ethers utils", ethers.utils.(this.state.account))
+      // const myTokensCount = await this.state.contract.balanceOf(this.state.account)
+      
+     //const nftContract = await ethers.getContractAt(abi, address);
+     
       await this.retrieveMyTokens();
 
+      }catch (Exception){
+        console.log(Exception)
+      }
 
 
     } else {
       window.alert('Smart contract not deployed to detected network.')
     }
   }
+  
+  async retrieveMyTokens(){
+
+    const myTokensCount = await this.state.contract.balanceOf(this.state.account)
+    //console.log("mytokenscount",myTokensCount)
+    //const myTokensCount = await this.state.contract.balanceOf(this.state.account)
+    for (var i=0; i < myTokensCount; i++){
+          const burger = await this.state.contract.tokenOfOwnerByIndex(this.state.account, i)
+          //const burger = await this.state.contract.tokenOfOwnerByIndex(this.state.account, i)
+          this.setState({
+             myBurgers: [...this.state.myBurgers, burger]
+          })
+          
+    }
+  
+  }
+
   
 async retrieveAllTokens (){
      const totalSupply = this.state.totalSupply;
@@ -191,47 +284,66 @@ async retrieveAllTokens (){
   
 async getTotalAmount(quant){
   //const amount = await this.state.contract.getNFTPrice(quant)
-    const amount = await this.state.contract.methods.getNFTPrice(quant).call()
+    const amount = await this.state.contract.getNFTPrice(quant)
   return amount
   }
+
   
-async retrieveMyTokens(){
+  
+/*
+filterMyNewBurgers = {
+    address: this.state.contractAddress,
+    topics: [
+        id("mintNFT([myaddress,address,uint256)"),
+        null,
+        hexZeroPad(this.state.account, 32)
+    ]
+};*/
 
-  const myTokensCount = await this.state.contract.methods.balanceOf(this.state.account).call()
-  //const myTokensCount = await this.state.contract.balanceOf(this.state.account)
-  for (var i=0; i < myTokensCount; i++){
-        const burger = await this.state.contract.methods.tokenOfOwnerByIndex(this.state.account, i).call()
-        //const burger = await this.state.contract.tokenOfOwnerByIndex(this.state.account, i)
-        this.setState({
-           myBurgers: [...this.state.myBurgers, burger]
-        })
-        
+async  mint  (quanto)  { 
+    const totalPrice = await this.getTotalAmount(quanto)
+    console.log(quanto, totalPrice)
+    this.state.contract.mintNFT(quanto ,{ value: totalPrice })  
+    
+    this.state.contract.on("Transfer", (to, amount, from) => {
+      //console.log(to, amount, from);
+      window.location.reload();
+
+  });
+
+    
   }
+  
 
-}
-
-async  mint  (quant)  { 
-    const totalPrice = await this.getTotalAmount(quant)
-    this.state.contract.methods.mintNFT(quant).send({ from: this.state.account,value: totalPrice })
-    //this.state.contract.mintNFT(quant).send({ from: this.state.account,value: totalPrice })
-    .once('receipt', (receipt) => {
+  /*
+  const lala = this.state.contract.once('logs', (receipt) => {
+      console.log(receipt)
       this.setState({
-        burgers: [...this.state.burgers, quant]
+        myBurgers: [...this.state.myBurgers, receipt]
       })
-    })
-  }
+      window.location.reload();
+    })  */
+
+/*
+  const dataMap = dataSource.reduce((acc, curr) => {
+    const prodArr = acc[curr.product.name];
+    return { ...acc, [curr.product.name]: prodArr ? [...prodArr, curr] : [curr] };
+  }, {});
+*/
 
   constructor(props) {
     super(props)
     this.state = {
       gateway: 'https://ipfs.io/ipfs/QmVcpqQ7xsp29HF8UNenCQ7GxrdhUQaqa3rZzMq7yAFiN9/',
       account: '',
+      accweb3: '',
       contract: null,
       totalSupply: 0,
-      web3: null,
       tokenPrice: 0,
       allBurgers: [],
-      myBurgers:[]
+      myBurgers:[],
+      intTotalSupply: 1,
+      contractAddress:'',
     }
   }
   
@@ -241,54 +353,88 @@ async  mint  (quant)  {
  
     return (
       
-      <div>
-       
-          <div id={styles.Allstuff}>
-          <div id={styles.Menu}>
-            <div id={styles.ContainsLinks}>
-              <div id={styles.LinkoTw}> <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">TWITTER </a> </div>
-              <div id={styles.LinkoTe}> <a href="https://www.telegram.com" target="_blank" rel="noopener noreferrer">TELEGRAM </a></div>
-              <div id={styles.LinkoDi}> <a href="https://www.discord.com" target="_blank" rel="noopener noreferrer">DISCORD </a></div>
-            </div>
-            <span id={styles.ContainsInfo}>
-              <span id={styles.InfoTotalSupply}>............20,020</span>
-              <span id={styles.InfoCurrentSupply}>.............19,323</span>
-              <span id={styles.InfoUnitPrice}>............M$14.70</span>
-            </span>
 
-            <div id={styles.ContainsBuy}>
-              <form onSubmit={(event) => {
-                event.preventDefault();
-                const quant = this.burger.value;
-                this.mint(quant);
-              } }>
-                <span>
+      
+      
+      <div id={styles.CryptoBurger}>
+          <div id={styles.MintingPage}>
+          <div id={styles.MenuBg}>
 
-                <input
-                  className={styles.Button}
-                  type='submit'
-                  value='ORDER NOW'
-                  img={Order} />
-                  </span>
-                  <span>
+            <div id={styles.Menu}>
+                <div id={styles.ContainsLinks}>
+                  <div id={styles.LinkoTw}> <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">TWITTER </a> </div>
+                  <div id={styles.LinkoTe}> <a href="https://www.telegram.com" target="_blank" rel="noopener noreferrer">TELEGRAM </a></div>
+                  <div id={styles.LinkoDi}> <a href="https://www.discord.com" target="_blank" rel="noopener noreferrer">DISCORD </a></div>
+                </div>
 
-                <input
-                  className={styles.Qtt}
-                  type="text"
-                  maxlenght="2"
-                  size="2"
-                  defaultValue="1"
-                  ref={(input) => { this.burger = input; } } />
-         </span>
-  </form>
+                <div id={styles.ContainsInfo}>
+                  <div id={styles.InfoTotalSupply}><div id={styles.TSL}> Total Supply </div><div id={styles.TSR} >20,020</div></div>
+                  <div id={styles.InfoCurrentSupply}><div id={styles.TSL}> Current Supply </div><div id={styles.TSR} > { this.state.intTotalSupply  } </div></div>
+                  <div id={styles.InfoUnitPrice}><div id={styles.TSL}> Burger Price</div><div id={styles.TSR} >ETH 0.0099</div></div>
+                </div>
 
+                <div id={styles.ContainsBuy}>
+                        <form onSubmit={(event) => {
+                                    event.preventDefault();
+                                    const quant = this.burger.value;
+                                    this.mint(quant);
+                                } }>
+                                <span>
+                                    <input
+                                      className={styles.Button}
+                                      type='submit'
+                                      value='ORDER NOW'
+                                      img={Order} />
+                                      </span>
+                                      <span>
 
-            </div>
-            </div>
+                                    <input
+                                      className={styles.Qtt}
+                                      type="number"
+                                      maxlenght="2"
+                                      min="1"
+                                      max="20"
+                                      size="2"
+                                      defaultValue="1"
+                                      ref={(input) => { this.burger = input; } } />
+                                  </span>
+                          </form>
+                  </div >
+            </div> 
           
         </div>
-                 
         </div>
+
+              
+        <div id={styles.MyBurgersPage}>
+        <div id={styles.MyBurgersBg}>
+        
+            <div id= {styles.MyBurguerHeader}>
+               <h1>My Burger Collection</h1></div>
+            <p></p>
+            <div id={styles.BurgerContent}>
+            <div className="row text-center">
+            { this.state.myBurgers.map((burger, key) => {
+              return(
+                <div key={key} className="col-md-2 mb-1">
+		<div> <img     
+		         style={{ width: "100%", margin: "5px 0" }}     
+		         alt={burger.toString()}    
+		         src={this.state.gateway + burger.toString() +'.png'}      
+		       />
+		</div>
+                  <div>{burger.toString()}</div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        </div>
+
+        </div>
+
+    </div>
+
 
        
     
