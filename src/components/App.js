@@ -423,7 +423,7 @@ async  mint  (quanto)  {
         <div id={styles.MyBurgersPage}>
         <div id={styles.MyBurgersBg}>
         
-            <div id= {styles.MyBurguerHeader}>
+            <div id= {styles.MyBurgerHeader}>
                <h1>My Burger Collection</h1></div>
             <p></p>
             <div id={styles.BurgerContent}>

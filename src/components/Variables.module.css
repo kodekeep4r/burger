@@ -450,7 +450,7 @@ img.bg {
   height:0;
 }
 
-#MyBurguerHeader{
+#MyBurgerHeader{
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
