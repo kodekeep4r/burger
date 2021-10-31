@@ -10,18 +10,17 @@ import '../font.ttf';
 
 
 import styles from './Variables.module.css';
-import ContractNFT from '../abis/ContractNFT.json'
+import ContractBurger from '../abis/ContractBurger.json'
 //import Siteo from '../site.png';
 import Order from '../site.png';
 
 
 /**
+ * adds or changes network
 
- * agrega o cambia la red con el chainid que le mandes
+ * if chainid sent exists just switches, otherwise it asks to add
 
- * si se le manda el chainid de la red que tiene el usario seleccionada no hace nada
-
- * @param {int} id es el chainid de la blockchain
+ * @param {int} id is the chainid of the blockchain
 
  */
 class App extends Component {
@@ -61,18 +60,33 @@ async addNetwork(id) {
         },
       ];
       break;
-    case 56:
+    case 43113:
       networkData = [
         {
-          chainId: "0x38",
-          chainName: "BSCMAINET",
-          rpcUrls: ["https://bsc-dataseed1.binance.org"],
+          chainId: "0xA869",
+          chainName: "Avalanche - Fuji Testnet",
+          rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
           nativeCurrency: {
-            name: "BINANCE COIN",
-            symbol: "BNB",
+            name: "AVAX",
+            symbol: "AVAX",
             decimals: 18,
           },
-          blockExplorerUrls: ["https://testnet.bscscan.com/"],
+          blockExplorerUrls: ["https://cchain.explorer.avax-test.network/"],
+        },
+      ];
+      break;
+      case 43114:
+      networkData = [
+        {
+          chainId: "0xA86A",
+          chainName: "Avalanche - Fuji Testnet",
+          rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+          nativeCurrency: {
+            name: "AVAX",
+            symbol: "AVAX",
+            decimals: 18,
+          },
+          blockExplorerUrls: ["https://cchain.explorer.avax.network/"],
         },
       ];
       break;
@@ -130,7 +144,7 @@ async loadWeb3() {
     try {
   await window.ethereum.request({
     method: 'wallet_switchEthereumChain',
-    params: [{ chainId: '0x13881' }],
+    params: [{ chainId: '0xA869' }],
   });
 } catch (switchError) {
   // This error code indicates that the chain has not been added to MetaMask.
@@ -138,15 +152,15 @@ async loadWeb3() {
     try {
       await window.ethereum.request({
         method: 'wallet_addEthereumChain',
-        params: [{ chainId: "0x13881",
-          chainName: "Mumbai Polygon (Matic) Testnet",
-          rpcUrls: ["https://matic-mumbai.chainstacklabs.com/"],
+        params: [{ chainId: "0xA86A",
+          chainName: "Avalanche - FUJI Testnet",
+          rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
           nativeCurrency: {
-            name: "MATIC",
-            symbol: "MATIC",
+            name: "AVAX",
+            symbol: "AVAX",
             decimals: 18,
           },
-          blockExplorerUrls: ["https://explorer-mumbai.maticvigil.com/"],
+          blockExplorerUrls: ["https://cchain.explorer.avax-test.network/"],
         }],
       });
     } catch (addError) {
@@ -185,7 +199,7 @@ console.log("Network: ", (networkId.chainId));
 //this.setState({ account: accounts[0] })
 
 
-   const networkData = ContractNFT.networks[networkId.chainId]
+   const networkData = ContractBurger.networks[networkId.chainId]
     /*
    const abiT = ContractNFT.abi
    const addressBeforeCheckSum= networkData.address
@@ -221,7 +235,7 @@ console.log("Network: ", (networkId.chainId));
 
     if(networkData) {
       try{
-      const abi = ContractNFT.abi
+      const abi = ContractBurger.abi
       const contractAddress = networkData.address
       const contract = new  ethers.Contract(contractAddress, abi, signer)
       //Contract.setProvider(this.provider);
@@ -232,7 +246,7 @@ console.log("Network: ", (networkId.chainId));
       //console.log(contract.toString())
       this.setState({ contract })
       const totalSupply = await contract.totalSupply()
-      const intTotalSupply = parseInt(totalSupply, 16);
+      const intTotalSupply = parseInt(totalSupply, 10); // AVALANCHE RETURNS DECIMAL, WHILE MATIC RETURNS HEXA
       this.setState({ intTotalSupply });
 
       console.log(this.state.intTotalSupply);
@@ -303,7 +317,7 @@ filterMyNewBurgers = {
 async  mint  (quanto)  { 
     const totalPrice = await this.getTotalAmount(quanto)
     console.log(quanto, totalPrice)
-    this.state.contract.mintNFT(quanto ,{ value: totalPrice })  
+    this.state.contract.mintBurger(quanto ,{ value: totalPrice })  
     
     this.state.contract.on("Transfer", (to, amount, from) => {
       //console.log(to, amount, from);
@@ -334,7 +348,7 @@ async  mint  (quanto)  {
   constructor(props) {
     super(props)
     this.state = {
-      gateway: 'https://ipfs.io/ipfs/QmVcpqQ7xsp29HF8UNenCQ7GxrdhUQaqa3rZzMq7yAFiN9/',
+      gateway: 'https://ipfs.io/ipfs/QmQNLs4TUN3xfRM5LDPuhP9KeEkX9cK3XTQ9CFU8NGxEPS/',
       account: '',
       accweb3: '',
       contract: null,
@@ -362,15 +376,15 @@ async  mint  (quanto)  {
 
             <div id={styles.Menu}>
                 <div id={styles.ContainsLinks}>
-                  <div id={styles.LinkoTw}> <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">TWITTER </a> </div>
-                  <div id={styles.LinkoTe}> <a href="https://www.telegram.com" target="_blank" rel="noopener noreferrer">TELEGRAM </a></div>
-                  <div id={styles.LinkoDi}> <a href="https://www.discord.com" target="_blank" rel="noopener noreferrer">DISCORD </a></div>
+                  <div id={styles.LinkoTw}> <a href="https://twitter.com/crptburger" target="_blank" rel="noopener noreferrer">TWITTER </a> </div>
+                  <div id={styles.LinkoTe}> <a href="https://t.me/cryptoburger_official" target="_blank" rel="noopener noreferrer">TELEGRAM </a></div>
+                  <div id={styles.LinkoDi}> <a href="https://cryptoburger.art" target="_blank" rel="noopener noreferrer">MARKETPLACE </a></div>
                 </div>
 
                 <div id={styles.ContainsInfo}>
                   <div id={styles.InfoTotalSupply}><div id={styles.TSL}> Total Supply </div><div id={styles.TSR} >20,020</div></div>
                   <div id={styles.InfoCurrentSupply}><div id={styles.TSL}> Current Supply </div><div id={styles.TSR} > { this.state.intTotalSupply  } </div></div>
-                  <div id={styles.InfoUnitPrice}><div id={styles.TSL}> Burger Price</div><div id={styles.TSR} >ETH 0.0099</div></div>
+                  <div id={styles.InfoUnitPrice}><div id={styles.TSL}> Burger Price</div><div id={styles.TSR} >AVAX 0.69</div></div>
                 </div>
 
                 <div id={styles.ContainsBuy}>
@@ -385,8 +399,8 @@ async  mint  (quanto)  {
                                       type='submit'
                                       value='ORDER NOW'
                                       img={Order} />
-                                      </span>
-                                      <span>
+                                </span>
+                                <span>
 
                                     <input
                                       className={styles.Qtt}
