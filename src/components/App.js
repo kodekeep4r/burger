@@ -148,7 +148,7 @@ async loadWeb3() {
   });
 } catch (switchError) {
   // This error code indicates that the chain has not been added to MetaMask.
-  if (switchError.code === 43113) {
+  if (switchError.code === 4902) {
     try {
       await window.ethereum.request({
         method: 'wallet_addEthereumChain',
