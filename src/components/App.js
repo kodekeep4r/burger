@@ -144,7 +144,7 @@ async loadWeb3() {
     try {
   await window.ethereum.request({
     method: 'wallet_switchEthereumChain',
-    params: [{ chainId: '0xA869' }],
+    params: [{ chainId: '0xA86A' }],
   });
 } catch (switchError) {
   // This error code indicates that the chain has not been added to MetaMask.
@@ -152,15 +152,14 @@ async loadWeb3() {
     try {
       await window.ethereum.request({
         method: 'wallet_addEthereumChain',
-        params: [{ chainId: "0xA869",
-          chainName: "Avalanche - FUJI Testnet",
-          rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+        params: [{ chainId: "0xA86A",
+          chainName: "Avalanche Mainnet",
+          rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
           nativeCurrency: {
-            name: "AVAX",
             symbol: "AVAX",
             decimals: 18,
           },
-          blockExplorerUrls: ["https://cchain.explorer.avax-test.network/"],
+          blockExplorerUrls: ["https://cchain.explorer.avax.network"],
         }],
       });
     } catch (addError) {
